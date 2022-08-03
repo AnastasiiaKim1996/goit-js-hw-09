@@ -75,7 +75,7 @@ function onStartButtonClick() {
   setDisabled(inputRef, startBtnRef);
 
   const timerId = setInterval(() => {
-    let leftoverTime = userSelectedDate - new Date();
+    let leftoverTime = userChooseDate - new Date();
 
     if (leftoverTime <= 0) {
       clearInterval(timerId);
