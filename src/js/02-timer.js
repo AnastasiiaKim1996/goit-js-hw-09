@@ -86,5 +86,4 @@ function onStartButtonClick() {
     updateUserInterface(resultTime);
   }, 1000);
 }
-
 startBtnRef.addEventListener('click', onStartButtonClick, options);
