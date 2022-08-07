@@ -13,19 +13,13 @@ const hoursRef = document.querySelector('[data-hours]');
 const minutesRef = document.querySelector('[data-minutes]');
 const secondsRef = document.querySelector('[data-seconds]');
 
-const options = { once: true, passive: true };
+// const options = { once: true, passive: true };
 
 let userChooseDate = null;
 
-const setDisabled = (...elems) => {
-  elems.forEach(el => el.setAttribute('disabled', true));
-};
+startBtnRef.setAttribute('disabled', 'disabled');
 
-const setEnabled = (...elems) => {
-  elems.forEach(el => el.removeAttribute('disabled'));
-};
-
-flatpickr(inputRef, {
+const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
@@ -36,10 +30,12 @@ flatpickr(inputRef, {
       Notify.failure('Please choose a date in the future');
     } else {
       userChooseDate = selectedDates[0];
-      setEnabled(startBtnRef);
+      startBtnRef.removeAttribute('disabled');
     }
   },
-});
+};
+
+flatpickr(inputRef, options);
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -71,8 +67,11 @@ function updateUserInterface({ days, hours, minutes, seconds }) {
   secondsRef.textContent = addLeadingZero(seconds);
 }
 
+startBtnRef.addEventListener('click', onStartButtonClick);
+
 function onStartButtonClick() {
-  setDisabled(inputRef, startBtnRef);
+  startBtnRef.setAttribute('disabled', 'disabled');
+  inputRef.setAttribute('disabled', 'disabled');
 
   const timerId = setInterval(() => {
     let leftoverTime = userChooseDate - new Date();
@@ -86,4 +85,3 @@ function onStartButtonClick() {
     updateUserInterface(resultTime);
   }, 1000);
 }
-startBtnRef.addEventListener('click', onStartButtonClick, options);
