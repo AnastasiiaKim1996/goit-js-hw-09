@@ -54,6 +54,8 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
+// --- start timer, clear input, isNotActive btn --- //
+
 function addLeadingZero(value) {
   return value.toString().padStart(2, '0');
 }
